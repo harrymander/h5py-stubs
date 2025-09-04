@@ -1,0 +1,9 @@
+from typing import Protocol, override
+
+class BaseID(Protocol):
+    @property
+    def id(self) -> int: ...
+    @override
+    def __eq__(self, other: object) -> bool: ...
+    @override
+    def __hash__(self) -> int: ...

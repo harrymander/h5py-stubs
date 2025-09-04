@@ -4,8 +4,8 @@ from os import PathLike
 from typing import Any, Literal, TypedDict, Unpack, overload, override
 
 import numpy as np
+from h5py import h5g
 from h5py._hl.dataset import Dataset
-from h5py.h5g import GroupID
 from numpy.typing import ArrayLike, DTypeLike, NDArray
 
 from .base import HLObject
@@ -36,7 +36,10 @@ class _CreateDatasetKwargs(TypedDict, total=False):
     rdcc_nslots: int
 
 class Group(HLObject, MutableMapping[str, HLObject]):
-    def __init__(self, h5g: GroupID) -> None: ...
+    def __init__(self, id: h5g.GroupID) -> None: ...
+    @property
+    @override
+    def id(self) -> h5g.GroupID: ...
 
     # MutableMapping iterface
     @override

@@ -3,8 +3,8 @@ from os import PathLike
 from typing import Any, override
 
 import numpy as np
+from h5py._base_id import BaseID
 from h5py._hl.attrs import AttributeManager
-from h5py.h5f import FileID
 from h5py.h5r import Reference, RegionReference
 from numpy.typing import DTypeLike
 
@@ -27,7 +27,7 @@ class HLObject(CommonStateObject):
     @property
     def parent(self) -> HLObject: ...
     @property
-    def id(self) -> FileID: ...
+    def id(self) -> BaseID: ...
     @property
     def ref(self) -> Reference: ...
     @property

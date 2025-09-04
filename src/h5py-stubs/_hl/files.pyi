@@ -1,6 +1,8 @@
 from collections.abc import Buffer, Callable
 from os import PathLike
-from typing import IO, Any, Literal, Self, TypedDict, Unpack, overload
+from typing import IO, Any, Literal, Self, TypedDict, Unpack, overload, override
+
+from h5py.h5f import FileID
 
 from .group import Group
 
@@ -114,6 +116,9 @@ class File(Group):
     def filename(self) -> str: ...
     @property
     def mode(self) -> str: ...
+    @property
+    @override
+    def id(self) -> FileID: ...  # type: ignore[override] # pyright: ignore[reportIncompatibleMethodOverride]
 
     #
     def __enter__(self) -> Self: ...

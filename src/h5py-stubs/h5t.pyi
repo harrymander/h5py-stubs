@@ -1,0 +1,3 @@
+from h5py._base_id import BaseID
+
+class TypeID(BaseID): ...
