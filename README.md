@@ -30,7 +30,8 @@ type Dataset[T: np.generic] = "h5py.Dataset[T]"
 
 ## To-do
 
-Complete stubs are missing for the following submodules:
+The following modules' stubs need to be modified from their pyright-generated
+versions:
 
 * `h5py._hl.compat`
 * `h5py._hl.dims`
