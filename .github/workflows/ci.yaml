@@ -34,6 +34,9 @@ jobs:
       - name: Run basedpyright
         run: uv run basedpyright
       - name: Configure pyright
+        # basedpyright supports a "recommended" type checking mode, which is
+        # similar to pyright's "strict" mode. Modify the option in
+        # pyrightconfig.json to ensure pyright runs in strict mode.
         run: |
           sed -i \
             's/"typeCheckingMode": "recommended"/"typeCheckingMode": "strict"/' \
