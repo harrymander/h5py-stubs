@@ -1,17 +1,10 @@
-from collections.abc import (
-    ItemsView,
-    Iterator,
-    KeysView,
-    Mapping,
-    MutableMapping,
-    ValuesView,
-)
+from collections.abc import ItemsView, KeysView, ValuesView
 from os import PathLike
 from typing import Any
 
 import numpy as np
 from h5py._hl.attrs import AttributeManager
-from numpy.typing import ArrayLike, DTypeLike
+from numpy.typing import DTypeLike
 
 from .files import File
 
@@ -49,22 +42,6 @@ class HLObject(CommonStateObject):
 class KeysViewHDF5(KeysView[str]): ...
 class ValuesViewHDF5(ValuesView[HLObject]): ...
 class ItemsViewHDF5(ItemsView[str, HLObject]): ...
-
-class MappingHDF5(Mapping[str, HLObject]):
-    def keys(self) -> KeysViewHDF5: ...
-    def values(self) -> ValuesViewHDF5: ...
-    def items(self) -> ItemsViewHDF5: ...
-    def __getitem__(self, name: str) -> HLObject: ...
-    def __iter__(self) -> Iterator[str]: ...
-    def __len__(self) -> int: ...
-
-class MutableMappingHDF5(MappingHDF5, MutableMapping[str, HLObject]):
-    def __delitem__(self, name: str) -> None: ...
-    def __setitem__(
-        self,
-        name: str,
-        val: HLObject | np.dtype[Any] | ArrayLike,
-    ) -> None: ...
 
 class Empty:
     @property
