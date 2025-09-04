@@ -31,7 +31,13 @@ jobs:
       - name: Install locked dependencies
         run: uv sync
       - name: Install latest type-checker dependencies
-        run: uv pip install --upgrade basedpyright mypy pyright
+        run: |
+          uv pip install --upgrade \
+            basedpyright \
+            mypy \
+            pyrefly \
+            pyright \
+            ty
       - name: Run mypy
         run: uv run mypy .
       - name: Run basedpyright
@@ -48,3 +54,7 @@ jobs:
           ! git diff --exit-code pyrightconfig.json
       - name: Run pyright
         run: uv run pyright
+      - name: Run pyrefly
+        run: uv run pyrefly check
+      - name: Run ty
+        run: uv run ty check
