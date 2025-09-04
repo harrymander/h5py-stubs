@@ -14,13 +14,16 @@ jobs:
         uses: pre-commit/action@v3.0.1
   type-checking:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12", "3.13"]
     steps:
       - name: Checkout repo
         uses: actions/checkout@v5
-      - name: Setup Python
+      - name: Setup Python ${{ matrix.python-version }}
         uses: actions/setup-python@v6
         with:
-          version: 3.12
+          version: ${{ matrix.python-version }}
       - name: Setup uv
         uses: astral-sh/setup-uv@v6
         with:
