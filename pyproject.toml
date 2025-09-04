@@ -1,6 +1,8 @@
 [project]
 name = "h5py-stubs"
 version = "0.1.0"
+description = "Type stubs for h5py"
+readme = "README.md"
 authors = [
     { name = "Harry Mander", email = "harry.mander@pg.canterbury.ac.nz" }
 ]
