@@ -2,7 +2,7 @@
 
 Python type stubs for [h5py](https://www.h5py.org/).
 
-Complete type hingint is only partially supported, but is mostly complete for
+Complete type hinting is only partially supported, but is mostly complete for
 most common features (e.g. reading and writing datasets, groups, attributes).
 
 Adds an optional dtype type parameter to `h5py.Dataset`, which will return a
