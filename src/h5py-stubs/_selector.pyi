@@ -1,1 +1,16 @@
-MultiBlockSlice: type
+class MultiBlockSlice:
+    @property
+    def start(self) -> int: ...
+    @property
+    def stride(self) -> int: ...
+    @property
+    def count(self) -> int | None: ...
+    @property
+    def block(self) -> int: ...
+    def __init__(
+        self,
+        start: int = 0,
+        stride: int = 1,
+        count: int | None = None,
+        block: int = 1,
+    ) -> None: ...
