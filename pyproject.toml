@@ -16,4 +16,19 @@ build-backend = "uv_build"
 [dependency-groups]
 dev = [
     "mypy>=1.17.1",
+    "ruff>=0.12.12",
+]
+
+[tool.ruff.lint]
+select = [
+    "B", # flake8-bugbear
+    "E", # pycodestyle errors
+    "F", # Pyflakes
+    "FURB", # refurb
+    "I", # isort
+    "PYI", # flake8-pyi
+    "RUF", # Ruff-specific rules
+    "SLOT", # flake8-slots
+    "UP", # pyupgrade
+    "W", # pycodestyle warnings
 ]
