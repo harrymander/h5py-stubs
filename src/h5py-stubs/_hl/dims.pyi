@@ -14,27 +14,19 @@ class DimensionProxy(base.CommonStateObject):
     Represents an HDF5 "dimension".
     """
     @property
-    @with_phil
     def label(self):  # -> None:
         """Get or set the dimension scale label"""
         ...
 
     @label.setter
-    @with_phil
     def label(self, val):  # -> None:
         ...
-    @with_phil
     def __init__(self, id_, dimension) -> None: ...
-    @with_phil
     def __hash__(self) -> int: ...
-    @with_phil
     def __eq__(self, other) -> bool: ...
-    @with_phil
     def __iter__(self):  # -> Generator[Any | None, Any, None]:
         ...
-    @with_phil
     def __len__(self): ...
-    @with_phil
     def __getitem__(self, item):  # -> Dataset:
         ...
     def attach_scale(self, dset):  # -> None:
@@ -65,7 +57,6 @@ class DimensionProxy(base.CommonStateObject):
         """Get a list of Dataset for scales on this dimension."""
         ...
 
-    @with_phil
     def __repr__(self):  # -> str:
         ...
 
@@ -76,27 +67,23 @@ class DimensionManager(base.CommonStateObject):
     Like AttributeManager, an instance of this class is returned when
     accessing the ".dims" property on a Dataset.
     """
-    @with_phil
+
     def __init__(self, parent) -> None:
         """Private constructor."""
         ...
 
-    @with_phil
     def __getitem__(self, index):  # -> DimensionProxy:
         """Return a Dimension object"""
         ...
 
-    @with_phil
     def __len__(self):
         """Number of dimensions associated with the dataset."""
         ...
 
-    @with_phil
     def __iter__(self):  # -> Generator[DimensionProxy, Any, None]:
         """Iterate over the dimensions."""
         ...
 
-    @with_phil
     def __repr__(self):  # -> str:
         ...
     def create_scale(self, dset, name=...):  # -> None:

@@ -224,7 +224,6 @@ class Group(HLObject, MutableMappingHDF5):
         """
         ...
 
-    @with_phil
     def __getitem__(self, name):  # -> Group | Dataset | Datatype:
         """Open an object in the file"""
         ...
@@ -282,27 +281,22 @@ class Group(HLObject, MutableMappingHDF5):
         """
         ...
 
-    @with_phil
     def __delitem__(self, name):  # -> None:
         """Delete (unlink) an item from this group."""
         ...
 
-    @with_phil
     def __len__(self):
         """Number of members attached to this group"""
         ...
 
-    @with_phil
     def __iter__(self):  # -> Generator[Any | None, Any, None]:
         """Iterate over member names"""
         ...
 
-    @with_phil
     def __reversed__(self):  # -> Generator[Any | None, Any, None]:
         """Iterate over member names in reverse order."""
         ...
 
-    @with_phil
     def __contains__(self, name):  # -> bool:
         """Test if a member name exists"""
         ...
@@ -469,7 +463,6 @@ class Group(HLObject, MutableMappingHDF5):
         """
         ...
 
-    @with_phil
     def __repr__(self):  # -> str:
         ...
 

@@ -86,61 +86,51 @@ class File(Group):
         ...
 
     @property
-    @with_phil
     def filename(self):  # -> str:
         """File name on disk"""
         ...
 
     @property
-    @with_phil
     def driver(self):  # -> str:
         """Low-level HDF5 file driver used to open file"""
         ...
 
     @property
-    @with_phil
     def mode(self):  # -> Literal['r+', 'r']:
         """Python mode used to open file"""
         ...
 
     @property
-    @with_phil
     def libver(self):  # -> tuple[str, ...]:
         """File format version bounds (2-tuple: low, high)"""
         ...
 
     @property
-    @with_phil
     def userblock_size(self):
         """User block size (in bytes)"""
         ...
 
     @property
-    @with_phil
     def meta_block_size(self):
         """Meta block size (in bytes)"""
         ...
 
     if mpi:
         @property
-        @with_phil
         def atomic(self):
             """Set/get MPI-IO atomic mode"""
             ...
 
         @atomic.setter
-        @with_phil
         def atomic(self, value):  # -> None:
             ...
 
     @property
-    @with_phil
     def swmr_mode(self):  # -> bool:
         """Controls single-writer multiple-reader mode"""
         ...
 
     @swmr_mode.setter
-    @with_phil
     def swmr_mode(self, value):  # -> None:
         ...
     def __init__(
@@ -290,7 +280,6 @@ class File(Group):
 
     _in_memory_file_counter = ...
     @classmethod
-    @with_phil
     def in_memory(cls, file_image=..., **kwargs):  # -> Self:
         """Create an HDF5 file in memory, without an underlying file
 
@@ -313,12 +302,9 @@ class File(Group):
         """Tell the HDF5 library to flush its buffers."""
         ...
 
-    @with_phil
     def __enter__(self):  # -> Self:
         ...
-    @with_phil
     def __exit__(self, *args):  # -> None:
         ...
-    @with_phil
     def __repr__(self):  # -> str:
         ...

@@ -35,7 +35,6 @@ class AttributeManager(base.MutableMappingHDF5, base.CommonStateObject):
         """Private constructor."""
         ...
 
-    @with_phil
     def __getitem__(
         self, name
     ):  # -> Empty | ndarray[_AnyShape, dtype[Any]] | ndarray[_AnyShape, dtype[float64]] | ndarray[tuple[int], dtype[Any]] | _Array1D[float64]:
@@ -46,7 +45,6 @@ class AttributeManager(base.MutableMappingHDF5, base.CommonStateObject):
         """Get a low-level AttrID object for the named attribute."""
         ...
 
-    @with_phil
     def __setitem__(self, name, value):  # -> None:
         """Set a new attribute, overwriting any existing attribute.
 
@@ -56,7 +54,6 @@ class AttributeManager(base.MutableMappingHDF5, base.CommonStateObject):
         """
         ...
 
-    @with_phil
     def __delitem__(self, name):  # -> None:
         """Delete an attribute (which must already exist)."""
         ...
@@ -88,7 +85,6 @@ class AttributeManager(base.MutableMappingHDF5, base.CommonStateObject):
         """
         ...
 
-    @with_phil
     def __len__(self):
         """Number of attributes attached to the object."""
         ...
@@ -97,11 +93,9 @@ class AttributeManager(base.MutableMappingHDF5, base.CommonStateObject):
         """Iterate over the names of attributes."""
         ...
 
-    @with_phil
     def __contains__(self, name):
         """Determine if an attribute exists, by name."""
         ...
 
-    @with_phil
     def __repr__(self):  # -> str:
         ...

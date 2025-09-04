@@ -108,13 +108,11 @@ class HLObject(CommonStateObject):
         ...
 
     @property
-    @with_phil
     def name(self):  # -> None:
         """Return the full name of this object.  None if anonymous."""
         ...
 
     @property
-    @with_phil
     def parent(self):  # -> Group | Dataset | Datatype:
         """Return the parent group of this object.
 
@@ -124,19 +122,16 @@ class HLObject(CommonStateObject):
         ...
 
     @property
-    @with_phil
     def id(self):  # -> Any:
         """Low-level identifier appropriate for this object"""
         ...
 
     @property
-    @with_phil
     def ref(self):
         """An (opaque) HDF5 reference to this object"""
         ...
 
     @property
-    @with_phil
     def regionref(self):  # -> _RegionProxy:
         """Create a region reference (Datasets only).
 
@@ -154,14 +149,11 @@ class HLObject(CommonStateObject):
         """Attributes attached to this object"""
         ...
 
-    @with_phil
     def __init__(self, oid) -> None:
         """Setup this object, given its low-level identifier"""
         ...
 
-    @with_phil
     def __hash__(self) -> int: ...
-    @with_phil
     def __eq__(self, other) -> bool: ...
     def __bool__(self):  # -> bool:
         ...

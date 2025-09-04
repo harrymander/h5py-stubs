@@ -172,7 +172,6 @@ class Dataset(HLObject):
 
     if MPI:
         @property
-        @with_phil
         def collective(self):  # -> CollectiveContext:
             """Context manager for MPI collective reads & writes"""
             ...
@@ -183,7 +182,6 @@ class Dataset(HLObject):
         ...
 
     @property
-    @with_phil
     def ndim(self):
         """Numpy-style attribute giving the number of dimensions"""
         ...
@@ -194,7 +192,6 @@ class Dataset(HLObject):
         ...
 
     @shape.setter
-    @with_phil
     def shape(self, shape):  # -> None:
         ...
     @property
@@ -208,43 +205,36 @@ class Dataset(HLObject):
         ...
 
     @property
-    @with_phil
     def dtype(self):
         """Numpy dtype representing the datatype"""
         ...
 
     @property
-    @with_phil
     def chunks(self):  # -> None:
         """Dataset chunks (or None)"""
         ...
 
     @property
-    @with_phil
     def compression(self):  # -> Literal['gzip', 'lzf', 'szip'] | None:
         """Compression strategy (or None)"""
         ...
 
     @property
-    @with_phil
     def compression_opts(self):
         """Compression setting.  Int(0-9) for gzip, 2-tuple for szip."""
         ...
 
     @property
-    @with_phil
     def shuffle(self):  # -> bool:
         """Shuffle filter present (T/F)"""
         ...
 
     @property
-    @with_phil
     def fletcher32(self):  # -> bool:
         """Fletcher32 filter is present (T/F)"""
         ...
 
     @property
-    @with_phil
     def scaleoffset(self):  # -> None:
         """Scale/offset filter settings. For integer data types, this is
         the number of bits stored, or 0 for auto-detected. For floating
@@ -253,7 +243,6 @@ class Dataset(HLObject):
         ...
 
     @property
-    @with_phil
     def external(self):  # -> list[Any] | None:
         """External file settings. Returns a list of tuples of
         (name, offset, size) for each external file entry, or returns None
@@ -261,19 +250,16 @@ class Dataset(HLObject):
         ...
 
     @property
-    @with_phil
     def maxshape(self):  # -> tuple[Any | None, ...] | None:
         """Shape up to which this dataset can be resized.  Axes with value
         None have no resize limit."""
         ...
 
     @property
-    @with_phil
     def fillvalue(self):  # -> Any:
         """Fill value for this dataset (0 by default)"""
         ...
 
-    @with_phil
     def __init__(self, bind, *, readonly=...) -> None:
         """Create a new Dataset object by binding to a low-level DatasetID."""
         ...
@@ -294,7 +280,6 @@ class Dataset(HLObject):
         """
         ...
 
-    @with_phil
     def __len__(self):
         """The size of the first axis.  TypeError if scalar.
 
@@ -310,7 +295,6 @@ class Dataset(HLObject):
         """
         ...
 
-    @with_phil
     def __iter__(self):  # -> Generator[Any, Any, None]:
         """Iterate over the first axis.  TypeError if scalar.
 
@@ -318,7 +302,6 @@ class Dataset(HLObject):
         """
         ...
 
-    @with_phil
     def iter_chunks(self, sel=...):  # -> ChunkIterator:
         """Return chunk iterator.  If set, the sel argument is a slice or
         tuple of slices that defines the region to be used. If not set, the
@@ -335,7 +318,6 @@ class Dataset(HLObject):
         """
         ...
 
-    @with_phil
     def __getitem__(self, args, new_dtype=...):
         """Read a slice from the HDF5 dataset.
 
@@ -349,7 +331,6 @@ class Dataset(HLObject):
         """
         ...
 
-    @with_phil
     def __setitem__(self, args, val):
         """Write to the HDF5 dataset from a Numpy array.
 
@@ -379,7 +360,6 @@ class Dataset(HLObject):
         """
         ...
 
-    @with_phil
     def __array__(self, dtype=..., copy=...):  # -> _Array1D[float64]:
         """Create a Numpy array containing the whole dataset.  DON'T THINK
         THIS MEANS DATASETS ARE INTERCHANGEABLE WITH ARRAYS.  For one thing,
@@ -387,12 +367,10 @@ class Dataset(HLObject):
         """
         ...
 
-    @with_phil
     def __repr__(self):  # -> str:
         ...
 
     if hasattr(h5d.DatasetID, "refresh"):
-        @with_phil
         def refresh(self):  # -> None:
             """Refresh the dataset metadata by reloading from the file.
 
@@ -402,7 +380,6 @@ class Dataset(HLObject):
             ...
 
     if hasattr(h5d.DatasetID, "flush"):
-        @with_phil
         def flush(self):  # -> None:
             """Flush the dataset data and metadata to the file.
             If the dataset is chunked, raw data chunks are written to the file.
@@ -414,17 +391,14 @@ class Dataset(HLObject):
 
     if vds_support:
         @property
-        @with_phil
         def is_virtual(self):
             """Check if this is a virtual dataset"""
             ...
 
-        @with_phil
         def virtual_sources(self):  # -> list[VDSmap]:
             """Get a list of the data mappings for a virtual dataset"""
             ...
 
-    @with_phil
     def make_scale(self, name=...):  # -> None:
         """Make this dataset an HDF5 dimension scale.
 
@@ -437,7 +411,6 @@ class Dataset(HLObject):
         ...
 
     @property
-    @with_phil
     def is_scale(self):
         """Return ``True`` if this dataset is also a dimension scale.
 

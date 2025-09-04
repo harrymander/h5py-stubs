@@ -19,16 +19,13 @@ class Datatype(HLObject):
     >>> assert named_type.dtype == numpy.dtype("f")
     """
     @property
-    @with_phil
     def dtype(self):
         """Numpy dtype equivalent for this datatype"""
         ...
 
-    @with_phil
     def __init__(self, bind) -> None:
         """Create a new Datatype object by binding to a low-level TypeID."""
         ...
 
-    @with_phil
     def __repr__(self):  # -> LiteralString | Literal['<Closed HDF5 named type>']:
         ...
