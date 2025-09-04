@@ -3,6 +3,7 @@ from typing import Any, Literal, Self, overload, override
 
 import numpy as np
 from h5py import h5d
+from h5py._hl.dims import DimensionManager
 from numpy.typing import DTypeLike, NDArray
 
 from .base import HLObject
@@ -108,8 +109,7 @@ class Dataset[T: np.generic](HLObject):
     @property
     def collective(self) -> CollectiveContext: ...
     @property
-    def dims(self) -> Sequence[int]:  # -> DimensionManager TODO
-        ...
+    def dims(self) -> DimensionManager: ...
     @property
     def ndim(self) -> int: ...
     @property

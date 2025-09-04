@@ -41,6 +41,7 @@ version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "h5py" },
+    { name = "typing-extensions" },
 ]
 
 [package.dev-dependencies]
@@ -54,7 +55,10 @@ dev-local = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "h5py", specifier = ">=3.14.0" }]
+requires-dist = [
+    { name = "h5py", specifier = ">=3.14.0" },
+    { name = "typing-extensions", specifier = ">=4.15.0" },
+]
 
 [package.metadata.requires-dev]
 dev = [{ name = "ruff", specifier = ">=0.12.12" }]
