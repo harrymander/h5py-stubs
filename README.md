@@ -5,6 +5,16 @@ Python type stubs for [h5py](https://www.h5py.org/).
 Complete type hinting is only partially supported, but is mostly complete for
 most common features (e.g. reading and writing datasets, groups, attributes).
 
+## Installation
+
+Not currently available on PyPI. Install via Git:
+
+```
+pip install "git+https://github.com/harrymander/h5py-stubs.git"
+```
+
+## Usage
+
 Adds an optional dtype type parameter to `h5py.Dataset`, which will return a
 type-parameterised `numpy.typing.NDArray` when used. E.g.
 
