@@ -39,9 +39,9 @@ jobs:
             pyright \
             ty
       - name: Run mypy
-        run: uv run mypy .
+        run: uv run mypy src
       - name: Run basedpyright
-        run: uv run basedpyright
+        run: uv run basedpyright src
       - name: Configure pyright
         # basedpyright supports a "recommended" type checking mode, which is
         # similar to pyright's "strict" mode. Modify the option in
@@ -53,11 +53,11 @@ jobs:
           # Check that the file was changed
           ! git diff --exit-code pyrightconfig.json
       - name: Run pyright
-        run: uv run pyright
+        run: uv run pyright src
       - name: Run pyrefly
-        run: uv run pyrefly check
+        run: uv run pyrefly check src
       - name: Run ty
-        run: uv run ty check
+        run: uv run ty check src
   tests:
     runs-on: ubuntu-latest
     strategy:
