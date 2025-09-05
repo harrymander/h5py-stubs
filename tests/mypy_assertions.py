@@ -9,16 +9,16 @@ def _add_line_numbers(s: str) -> str:
     return "\n".join(f"{i + 1:>{width}}| {line}" for i, line in enumerate(lines))
 
 
-def assert_mypy_passes(source: str) -> None:
+def _assert_mypy_passes(dedented_source: str) -> None:
     __tracebackhide__ = True
-    stdout, stderr, ret = mypy.api.run(["-c", source])
+    stdout, stderr, ret = mypy.api.run(["-c", dedented_source])
     if ret == 0:
         return
 
     msg = [f"mypy error ({ret = })"]
     indent = "  "
     msg.append("=== source ===")
-    msg.append(textwrap.indent(_add_line_numbers(source), indent))
+    msg.append(_add_line_numbers(dedented_source))
     if stdout:
         msg.append("=== mypy stdout ===")
         msg.append(textwrap.indent(stdout, indent))
@@ -26,6 +26,16 @@ def assert_mypy_passes(source: str) -> None:
         msg.append("=== mypy stderr ===")
         msg.append(textwrap.indent(stderr, indent))
     raise AssertionError("\n".join(msg))
+
+
+def assert_mypy_passes(source: str) -> None:
+    """
+    Assert that mypy passes on the given source code.
+
+    `source` is dedented before passing to mypy.
+    """
+    __tracebackhide__ = True
+    _assert_mypy_passes(textwrap.dedent(source))
 
 
 def assert_type_expressions(
@@ -47,4 +57,4 @@ def assert_type_expressions(
     if setup:
         lines.append(textwrap.dedent(setup))
     lines.extend(f"assert_type({expr}, {exp_type})" for expr in expressions)
-    assert_mypy_passes("\n".join(lines))
+    _assert_mypy_passes("\n".join(lines))
