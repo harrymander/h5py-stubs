@@ -55,13 +55,16 @@ dependencies = [
 
 [package.dev-dependencies]
 dev = [
-    { name = "pytest" },
     { name = "ruff" },
 ]
 dev-local = [
     { name = "basedpyright" },
     { name = "mypy" },
     { name = "pyright" },
+]
+tests = [
+    { name = "mypy" },
+    { name = "pytest" },
 ]
 
 [package.metadata]
@@ -71,14 +74,15 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [
-    { name = "pytest", specifier = ">=8.4.2" },
-    { name = "ruff", specifier = ">=0.12.12" },
-]
+dev = [{ name = "ruff", specifier = ">=0.12.12" }]
 dev-local = [
     { name = "basedpyright", specifier = ">=1.31.4" },
     { name = "mypy", specifier = ">=1.17.1" },
     { name = "pyright", specifier = ">=1.1.405" },
+]
+tests = [
+    { name = "mypy", specifier = ">=1.17.1" },
+    { name = "pytest", specifier = ">=8.4.2" },
 ]
 
 [[package]]
