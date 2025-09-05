@@ -37,6 +37,8 @@ class _CreateDatasetKwargs(TypedDict, total=False):
     rdcc_w0: float
     rdcc_nslots: int
 
+type _TypedDtypeLike[T: np.generic] = type[T] | np.dtype[T]
+
 class Group(HLObject, MutableMapping[str, HLObject]):
     def __init__(self, id: h5g.GroupID) -> None: ...
     @property
@@ -93,7 +95,7 @@ class Group(HLObject, MutableMapping[str, HLObject]):
         self,
         name: str,
         shape: tuple[int, ...] | None,
-        dtype: type[T],
+        dtype: _TypedDtypeLike[T],
         data: ArrayLike | None = ...,
         **kwargs: Unpack[_CreateDatasetKwargs],
     ) -> Dataset[T]: ...
@@ -102,7 +104,7 @@ class Group(HLObject, MutableMapping[str, HLObject]):
         self,
         name: str,
         *,
-        dtype: type[T],
+        dtype: _TypedDtypeLike[T],
         shape: tuple[int, ...] | None = ...,
         data: ArrayLike | None = ...,
         **kwargs: Unpack[_CreateDatasetKwargs],
@@ -112,7 +114,7 @@ class Group(HLObject, MutableMapping[str, HLObject]):
         self,
         name: str,
         shape: tuple[int, ...] | None = None,
-        dtype: type | None = None,
+        dtype: DTypeLike | None = None,
         data: ArrayLike | None = None,
         **kwargs: Unpack[_CreateDatasetKwargs],
     ) -> Dataset[Any]: ...
@@ -124,7 +126,7 @@ class Group(HLObject, MutableMapping[str, HLObject]):
         name: str,
         other: Dataset[Any],
         *,
-        dtype: type[T],
+        dtype: _TypedDtypeLike[T],
         shape: tuple[int, ...] | None = ...,
         data: ArrayLike | None = ...,
         **kwargs: Unpack[_CreateDatasetKwargs],
@@ -146,7 +148,7 @@ class Group(HLObject, MutableMapping[str, HLObject]):
         name: str,
         other: Dataset[Any],
         *,
-        dtype: type | None = ...,
+        dtype: DTypeLike | None = ...,
         shape: tuple[int, ...] | None = ...,
         data: ArrayLike | None = ...,
         **kwargs: Unpack[_CreateDatasetKwargs],

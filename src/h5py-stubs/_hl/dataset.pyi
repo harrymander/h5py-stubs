@@ -12,6 +12,8 @@ from .base import HLObject
 
 MPI: Incomplete
 
+type _TypedDtypeLike[T: np.generic] = type[T] | np.dtype[T]
+
 class AbstractView[T: np.generic]:
     def __init__(self, dset: Dataset[Any]) -> None: ...
     def __len__(self) -> int: ...
@@ -29,7 +31,7 @@ class AbstractView[T: np.generic]:
     @overload
     def __array__[NewT: np.generic](
         self,
-        dtype: type[NewT],
+        dtype: _TypedDtypeLike[NewT],
         copy: Literal[True] | None = ...,
     ) -> NDArray[NewT]: ...
     @overload
@@ -82,7 +84,10 @@ class Dataset[T: np.generic](HLObject):
     @override
     def id(self) -> h5d.DatasetID: ...
     @overload
-    def astype[NewT: np.generic](self, dtype: type[NewT]) -> AsTypeView[NewT]: ...
+    def astype[NewT: np.generic](
+        self,
+        dtype: _TypedDtypeLike[NewT],
+    ) -> AsTypeView[NewT]: ...
     @overload
     def astype(self, dtype: DTypeLike) -> Self | AsTypeView[Any]: ...
 
@@ -95,7 +100,7 @@ class Dataset[T: np.generic](HLObject):
         self,
         names: str | Sequence[str],
         *,
-        _prior_dtype: type[NewT],
+        _prior_dtype: _TypedDtypeLike[NewT],
     ) -> FieldsView[NewT]: ...
     @overload
     def fields(
@@ -169,7 +174,7 @@ class Dataset[T: np.generic](HLObject):
     def __getitem__[NewT: np.generic](
         self,
         args: Any,
-        new_dtype: type[NewT],
+        new_dtype: _TypedDtypeLike[NewT],
     ) -> NDArray[NewT]: ...
     @overload
     def __getitem__(self, args: Any, new_dtype: DTypeLike) -> NDArray[Any]: ...
@@ -180,7 +185,7 @@ class Dataset[T: np.generic](HLObject):
     @overload
     def __array__[NewT: np.generic](
         self,
-        dtype: type[NewT],
+        dtype: _TypedDtypeLike[NewT],
         copy: Literal[True] | None = ...,
     ) -> NDArray[NewT]: ...
     @overload
