@@ -1,45 +1,17 @@
-import textwrap
-
-import mypy.api
-
-
-def _add_line_numbers(s: str) -> str:
-    lines = s.splitlines()
-    width = len(str(len(lines)))
-    return "\n".join(f"{i + 1:>{width}}| {line}" for i, line in enumerate(lines))
+from .mypy_assertions import assert_type_expressions
 
 
 def assert_group_get_return_type(exp_type: str, *calls_args: str) -> None:
     __tracebackhide__ = True
 
-    if not calls_args:
-        raise TypeError("got 1 positional argument, 2 or more required")
-
-    preamble = """\
-    from typing import assert_type
-    import h5py
-    group: h5py.Group
-    """
-    lines = [
-        textwrap.dedent(preamble),
-        *(f"assert_type(group.get({args}), {exp_type})" for args in calls_args),
-    ]
-    source = "\n".join(lines)
-    stdout, stderr, ret = mypy.api.run(["-c", source])
-    if ret == 0:
-        return
-
-    msg = [f"mypy error ({ret = })"]
-    indent = "  "
-    msg.append("=== source ===")
-    msg.append(textwrap.indent(_add_line_numbers(source), indent))
-    if stdout:
-        msg.append("=== mypy stdout ===")
-        msg.append(textwrap.indent(stdout, indent))
-    if stderr:
-        msg.append("=== mypy stderr ===")
-        msg.append(textwrap.indent(stderr, indent))
-    raise AssertionError("\n".join(msg))
+    assert_type_expressions(
+        exp_type,
+        *(f"group.get({args})" for args in calls_args),
+        setup="""\
+        import h5py
+        group: h5py.Group
+        """,
+    )
 
 
 def test_group_get_no_default() -> None:
