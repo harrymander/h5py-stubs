@@ -33,7 +33,6 @@ type Dataset[T: np.generic] = "h5py.Dataset[T]"
 The following modules' stubs need to be modified from their pyright-generated
 versions:
 
-* `h5py._hl.filters`
 * `h5py._hl.selections2`
 * `h5py._hl.selections`
 * `h5py._hl.vds`
