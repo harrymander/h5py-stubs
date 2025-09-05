@@ -27,12 +27,3 @@ alias. E.g. in Python 3.12 or later:
 ```python
 type Dataset[T: np.generic] = "h5py.Dataset[T]"
 ```
-
-## To-do
-
-The following modules' stubs need to be modified from their pyright-generated
-versions:
-
-* `h5py._hl.selections2`
-* `h5py._hl.selections`
-* `h5py._hl.vds`
