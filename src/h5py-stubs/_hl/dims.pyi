@@ -1,7 +1,7 @@
 from collections.abc import Iterator
 from typing import Any, override
 
-from h5py import Dataset
+from h5py._hl.dataset import Dataset
 from typing_extensions import deprecated
 
 from . import base

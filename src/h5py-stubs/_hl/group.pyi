@@ -4,8 +4,9 @@ from os import PathLike
 from typing import Any, Literal, TypedDict, Unpack, overload, override
 
 import numpy as np
-from h5py import VirtualLayout, h5g
+from h5py import h5g
 from h5py._hl.dataset import Dataset
+from h5py._hl.vds import VirtualLayout
 from numpy.typing import ArrayLike, DTypeLike, NDArray
 
 from .base import HLObject

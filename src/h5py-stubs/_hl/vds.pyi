@@ -1,7 +1,8 @@
 from os import PathLike
 from typing import Any, NamedTuple, Self
 
-from h5py import Dataset, Group
+from h5py._hl.dataset import Dataset
+from h5py._hl.group import Group
 from numpy.typing import DTypeLike
 
 # TODO: type these fields
