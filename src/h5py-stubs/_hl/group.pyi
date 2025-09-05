@@ -4,7 +4,7 @@ from os import PathLike
 from typing import Any, Literal, TypedDict, Unpack, overload, override
 
 import numpy as np
-from h5py import h5g
+from h5py import VirtualLayout, h5g
 from h5py._hl.dataset import Dataset
 from numpy.typing import ArrayLike, DTypeLike, NDArray
 
@@ -150,11 +150,11 @@ class Group(HLObject, MutableMapping[str, HLObject]):
         **kwargs: Unpack[_CreateDatasetKwargs],
     ) -> Dataset[Any]: ...
 
-    # TODO: layout type and return values
+    #
     def create_virtual_dataset(
         self,
         name: str,
-        layout: Any,
+        layout: VirtualLayout,
         fillvalue: Any = ...,
     ) -> Dataset[Any]: ...
     @contextmanager
@@ -165,7 +165,7 @@ class Group(HLObject, MutableMapping[str, HLObject]):
         dtype: DTypeLike,
         maxshape: tuple[int | None, ...] | None = ...,
         fillvalue: Any = ...,
-    ) -> Iterator[Any]: ...
+    ) -> Iterator[VirtualLayout]: ...
 
     #
     def move(self, source: str, dest: str) -> None: ...
