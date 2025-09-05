@@ -205,7 +205,7 @@ class Group(HLObject, MutableMapping[str, HLObject]):
 
     # getlink=True and getclass=True -> type[_LinkType] | T
     @overload  # type: ignore[override]
-    def get(
+    def get(  # pyrefly: ignore[bad-override]
         self,
         name: str,
         /,
