@@ -4,6 +4,7 @@ from os import PathLike
 from typing import Any, Literal, TypedDict, Unpack, overload, override
 
 import numpy as np
+from _typeshed import Incomplete
 from h5py import h5g
 from h5py._hl.dataset import Dataset
 from h5py._hl.vds import VirtualLayout
@@ -15,11 +16,11 @@ class _CreateDatasetKwargs(TypedDict, total=False):
     chunks: bool | tuple[int, ...] | int
     maxshape: tuple[int | None, ...] | int
     compression: Literal["gzip", "szip", "lzf"] | int
-    compression_opts: Any
-    scaleoffset: Any
+    compression_opts: Incomplete
+    scaleoffset: Incomplete
     shuffle: bool
     fletcher32: bool
-    fillvalue: Any
+    fillvalue: Incomplete
     track_times: bool
     track_order: bool
     external: Iterable[

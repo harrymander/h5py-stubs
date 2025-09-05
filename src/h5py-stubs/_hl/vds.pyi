@@ -1,16 +1,17 @@
 from os import PathLike
 from typing import Any, NamedTuple, Self
 
+from _typeshed import Incomplete
 from h5py._hl.dataset import Dataset
 from h5py._hl.group import Group
 from numpy.typing import DTypeLike
 
 # TODO: type these fields
 class VDSmap(NamedTuple):
-    vspace: Any
-    file_name: Any
-    dset_name: Any
-    src_space: Any
+    vspace: Incomplete
+    file_name: Incomplete
+    dset_name: Incomplete
+    src_space: Incomplete
 
 vds_support: bool
 
@@ -45,4 +46,4 @@ class VirtualLayout:
         parent: Group,
         name: str,
         fillvalue: Any = ...,
-    ) -> Any: ...
+    ) -> Incomplete: ...

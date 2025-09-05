@@ -1,4 +1,7 @@
+from _typeshed import Incomplete
 from h5py._base_id import BaseID
+
+def __getattr__(name: str) -> Incomplete: ...
 
 class AttrID(BaseID):
     @property

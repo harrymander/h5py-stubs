@@ -2,6 +2,7 @@ from collections.abc import Sequence
 from typing import Any, Literal, Self, overload, override
 
 import numpy as np
+from _typeshed import Incomplete
 from h5py import h5d
 from h5py._hl.dims import DimensionManager
 from h5py._hl.vds import VDSmap
@@ -9,7 +10,7 @@ from numpy.typing import DTypeLike, NDArray
 
 from .base import HLObject
 
-MPI: Any
+MPI: Incomplete
 
 class AbstractView[T: np.generic]:
     def __init__(self, dset: Dataset[Any]) -> None: ...
@@ -65,7 +66,7 @@ class CollectiveContext:
     def __exit__(self, *_) -> None: ...
 
 class ChunkIterator:
-    def __init__(self, dset: Dataset[Any], source_sel: Any = ...) -> None: ...
+    def __init__(self, dset: Dataset[Any], source_sel: Incomplete = ...) -> None: ...
     def __iter__(self) -> Self: ...
     def __next__(self) -> tuple[slice, ...]: ...
 
@@ -141,7 +142,7 @@ class Dataset[T: np.generic](HLObject):
     def maxshape(self) -> tuple[int | None, ...] | None: ...
     @property
     def fillvalue(self) -> Any: ...
-    def iter_chunks(self, sel: Any = ...) -> ChunkIterator: ...
+    def iter_chunks(self, sel: Incomplete = ...) -> ChunkIterator: ...
     def refresh(self) -> None: ...
     def flush(self) -> None: ...
     @property
@@ -194,13 +195,13 @@ class Dataset[T: np.generic](HLObject):
     # TODO:
     def read_direct(
         self,
-        dest: Any,
-        source_sel: Any = ...,
-        dest_sel: Any = ...,
+        dest: Incomplete,
+        source_sel: Incomplete = ...,
+        dest_sel: Incomplete = ...,
     ) -> None: ...
     def write_direct(
         self,
-        source: Any,
-        source_sel: Any = ...,
-        dest_sel: Any = ...,
+        source: Incomplete,
+        source_sel: Incomplete = ...,
+        dest_sel: Incomplete = ...,
     ) -> None: ...

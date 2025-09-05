@@ -1,5 +1,8 @@
-from typing import Protocol, override
+from typing import Protocol, override, type_check_only
 
+from _typeshed import Incomplete
+
+@type_check_only
 class BaseID(Protocol):
     @property
     def id(self) -> int: ...
@@ -7,3 +10,4 @@ class BaseID(Protocol):
     def __eq__(self, other: object) -> bool: ...
     @override
     def __hash__(self) -> int: ...
+    def __getattr__(self, name: str, /) -> Incomplete: ...

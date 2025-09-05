@@ -1,7 +1,8 @@
 from collections.abc import Buffer, Callable
 from os import PathLike
-from typing import IO, Any, Literal, Self, TypedDict, Unpack, overload, override
+from typing import IO, Literal, Self, TypedDict, Unpack, overload, override
 
+from _typeshed import Incomplete
 from h5py.h5f import FileID
 
 from .group import Group
@@ -18,35 +19,35 @@ def register_driver(name: str, set_fapl: Callable[..., None]) -> None: ...
 def unregister_driver(name: str) -> None: ...
 def registered_drivers() -> frozenset[str]: ...
 def make_fapl(
-    driver: Any,
-    libver: Any = ...,
-    rdcc_nslots: Any = ...,
-    rdcc_nbytes: Any = ...,
-    rdcc_w0: Any = ...,
-    locking: Any = ...,
-    page_buf_size: Any = ...,
-    min_meta_keep: Any = ...,
-    min_raw_keep: Any = ...,
-    alignment_threshold: Any = ...,
-    alignment_interval: Any = ...,
-    meta_block_size: Any = ...,
-    **kwds: Any,
-) -> Any: ...
+    driver: Incomplete,
+    libver: Incomplete = ...,
+    rdcc_nslots: Incomplete = ...,
+    rdcc_nbytes: Incomplete = ...,
+    rdcc_w0: Incomplete = ...,
+    locking: Incomplete = ...,
+    page_buf_size: Incomplete = ...,
+    min_meta_keep: Incomplete = ...,
+    min_raw_keep: Incomplete = ...,
+    alignment_threshold: Incomplete = ...,
+    alignment_interval: Incomplete = ...,
+    meta_block_size: Incomplete = ...,
+    **kwds: Incomplete,
+) -> Incomplete: ...
 def make_fcpl(
-    track_order: Any = ...,
-    fs_strategy: Any = ...,
-    fs_persist: Any = ...,
-    fs_threshold: Any = ...,
-    fs_page_size: Any = ...,
-) -> Any: ...
+    track_order: Incomplete = ...,
+    fs_strategy: Incomplete = ...,
+    fs_persist: Incomplete = ...,
+    fs_threshold: Incomplete = ...,
+    fs_page_size: Incomplete = ...,
+) -> Incomplete: ...
 def make_fid(
     name: str,
     mode: str,
-    userblock_size: Any,
-    fapl: Any,
-    fcpl: Any = ...,
-    swmr: Any = ...,
-) -> Any: ...
+    userblock_size: Incomplete,
+    fapl: Incomplete,
+    fcpl: Incomplete = ...,
+    swmr: Incomplete = ...,
+) -> Incomplete: ...
 
 type _LibverSpec = Literal[
     "earliest",
@@ -97,7 +98,7 @@ class File(Group):
         mode: _FileOpenMode = "r",
         *,
         driver: Literal["mpio"],
-        comm: Any,
+        comm: Incomplete,
         **kwargs: Unpack[_FileKwargs],
     ) -> None: ...
 
@@ -136,9 +137,9 @@ class File(Group):
 
     # TODO: atomic is bool?
     @property
-    def atomic(self) -> Any: ...
+    def atomic(self) -> Incomplete: ...
     @atomic.setter
-    def atomic(self, value: Any) -> None: ...
+    def atomic(self, value: Incomplete) -> None: ...
 
     #
     @property
