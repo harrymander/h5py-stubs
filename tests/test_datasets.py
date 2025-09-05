@@ -62,3 +62,53 @@ def test_create_dataset_with_unknown_type(args_expr: str) -> None:
     dataset = group.create_dataset("name", {args_expr})
     assert_type(dataset, h5py.Dataset[Any])
     """)
+
+
+def test_index_typed_dataset_returns_typed_ndarray() -> None:
+    assert_mypy_passes("""\
+    from typing import assert_type
+    import h5py
+    import numpy as np
+    from numpy.typing import NDArray
+
+    dataset: h5py.Dataset[np.float32]
+    assert_type(dataset[1:5], NDArray[np.float32])
+    """)
+
+
+def test_index_untyped_dataset_returns_untyped_ndarray() -> None:
+    assert_mypy_passes("""\
+    from typing import assert_type, Any
+    import h5py
+    import numpy as np
+    from numpy.typing import NDArray
+
+    dataset: h5py.Dataset
+    assert_type(dataset[1:5], NDArray[Any])
+    """)
+
+
+def test_iterating_typed_dataset_returns_typed_ndarray() -> None:
+    assert_mypy_passes("""\
+    from typing import assert_type
+    import h5py
+    import numpy as np
+    from numpy.typing import NDArray
+
+    dataset: h5py.Dataset[np.float32]
+    for i in dataset:
+        assert_type(i, NDArray[np.float32])
+    """)
+
+
+def test_iterating_untyped_dataset_returns_untyped_ndarray() -> None:
+    assert_mypy_passes("""\
+    from typing import assert_type, Any
+    import h5py
+    import numpy as np
+    from numpy.typing import NDArray
+
+    dataset: h5py.Dataset
+    for i in dataset:
+        assert_type(i, NDArray[Any])
+    """)
