@@ -15,7 +15,7 @@ def _assert_mypy_passes(dedented_source: str) -> None:
     if ret == 0:
         return
 
-    msg = [f"mypy error ({ret = })"]
+    msg = [f"mypy error (exit code = {ret})"]
     indent = "  "
     msg.append("=== source ===")
     msg.append(_add_line_numbers(dedented_source))
