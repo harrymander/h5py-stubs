@@ -30,7 +30,12 @@ def _assert_mypy_passes(dedented_source: str) -> None:
         return
 
     error_msg = _format_mypy_output(dedented_source, stdout, stderr)
-    raise AssertionError(f"mypy error (exit code = {ret})\n{error_msg}")
+    header = (
+        "mypy type checking failed"
+        if ret == 1
+        else f"mypy internal error (exit code = {ret})"
+    )
+    raise AssertionError(f"{header}\n{error_msg}")
 
 
 def assert_mypy_passes(source: str) -> None:
