@@ -48,20 +48,24 @@ class Group(HLObject, MutableMapping[str, HLObject]):
     @override
     def __len__(self) -> int: ...
     @override
-    def __delitem__(self, key: str) -> None: ...
+    def __delitem__(self, key: str | bytes) -> None: ...
     @override
     def __setitem__(
         self,
-        key: str,
+        key: str | bytes,
         val: HLObject | np.dtype[Any] | ArrayLike,
     ) -> None: ...
     @override
     def __iter__(self) -> Iterator[str]: ...
 
+    # Will raise TypeError if non str/bytes is checked
+    @override
+    def __contains__(self, key: str | bytes, /) -> bool: ...  # type: ignore[override] # pyright: ignore[reportIncompatibleMethodOverride]
+
     #
     @override
     @overload
-    def __getitem__(self, key: str) -> HLObject: ...
+    def __getitem__(self, key: str | bytes) -> HLObject: ...
     @overload
     def __getitem__[T: HLObject](self, key: h5r.Reference[T]) -> T: ...
 
