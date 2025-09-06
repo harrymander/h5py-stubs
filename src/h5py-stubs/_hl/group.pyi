@@ -6,11 +6,10 @@ from typing import Any, Literal, TypedDict, Unpack, overload, override
 import numpy as np
 from _typeshed import Incomplete
 from h5py import h5g, h5r
+from h5py._hl.base import HLObject
 from h5py._hl.dataset import Dataset
 from h5py._hl.vds import VirtualLayout
 from numpy.typing import ArrayLike, DTypeLike, NDArray
-
-from .base import HLObject
 
 class _CreateDatasetKwargs(TypedDict, total=False):
     chunks: bool | tuple[int, ...] | int

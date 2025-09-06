@@ -6,25 +6,30 @@ import numpy as np
 from h5py._base_id import BaseID
 from h5py._hl.attrs import AttributeManager
 from h5py._hl.dataset import Dataset
+from h5py._hl.files import File
 from h5py.h5r import Reference, RegionReference
 from numpy.typing import DTypeLike
-
-from .files import File
 
 def is_hdf5(fname: str | bytes | PathLike[str]) -> bool: ...
 
 class CommonStateObject: ...
 
 class _RegionProxy[T: HLObject]:
-    def shape(self, ref: RegionReference[T]) -> tuple[int, ...]: ...
-    def selection(self, ref: RegionReference[T]) -> tuple[int, ...]: ...
+    def shape(
+        self,
+        ref: RegionReference[T],  # pyrefly: ignore[bad-specialization]
+    ) -> tuple[int, ...]: ...
+    def selection(
+        self,
+        ref: RegionReference[T],  # pyrefly: ignore[bad-specialization]
+    ) -> tuple[int, ...]: ...
 
     # Only supported for _RegionProxy[Dataset]
     @overload
     def __getitem__[DType: np.generic](
-        self: _RegionProxy[Dataset[DType]],
+        self: _RegionProxy[Dataset[DType]],  # pyrefly: ignore[bad-specialization]
         args: Any,
-    ) -> RegionReference[T]: ...
+    ) -> RegionReference[T]: ...  # pyrefly: ignore[bad-specialization]
     @overload
     def __getitem__(self, args: Any) -> NoReturn: ...
 
@@ -38,7 +43,7 @@ class HLObject(CommonStateObject):
     @property
     def id(self) -> BaseID: ...
     @property
-    def ref(self) -> Reference[Self]: ...
+    def ref(self) -> Reference[Self]: ...  # pyrefly: ignore[bad-specialization]
     @property
     def regionref(self) -> _RegionProxy[Self]: ...
     @property
