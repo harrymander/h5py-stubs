@@ -2,6 +2,8 @@
 name = "h5py-stubs"
 version = "0.1.0"
 description = "Type stubs for h5py"
+license = "MIT"
+license-files = ["LICENSE"]
 readme = "README.md"
 authors = [
     { name = "Harry Mander", email = "harry.mander@pg.canterbury.ac.nz" }
