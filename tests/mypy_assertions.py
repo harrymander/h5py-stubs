@@ -1,3 +1,4 @@
+import os
 import re
 import textwrap
 
@@ -23,9 +24,15 @@ def _format_mypy_output(source: str, stdout: str, stderr: str) -> str:
     return "\n".join(msg)
 
 
+def _run_mypy(source: str) -> tuple[str, str, int]:
+    # Disable the cache dir. See:
+    # https://mypy.readthedocs.io/en/stable/command_line.html#cmdoption-mypy-cache-dir
+    return mypy.api.run([f"--cache-dir={os.devnull}", "--no-incremental", "-c", source])
+
+
 def _assert_mypy_passes(dedented_source: str) -> None:
     __tracebackhide__ = True
-    stdout, stderr, ret = mypy.api.run(["-c", dedented_source])
+    stdout, stderr, ret = _run_mypy(dedented_source)
     if ret == 0:
         return
 
@@ -64,7 +71,7 @@ def assert_mypy_fails(source: str, line: int, regex: str) -> None:
         raise ValueError("line number must be >= 1")
 
     source = textwrap.dedent(source)
-    stdout, stderr, ret = mypy.api.run(["-c", source])
+    stdout, stderr, ret = _run_mypy(source)
     if ret == 0:
         raise AssertionError("mypy exited without error")
     if ret != 1:
