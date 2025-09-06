@@ -70,11 +70,11 @@ class Group(HLObject, MutableMapping[str, HLObject]):
     def __getitem__[T: HLObject](self, key: h5r.Reference[T]) -> T: ...
 
     #
-    def require_group(self, name: str) -> Group: ...
-    def require_dataset(self, name: str) -> Dataset[Any]: ...
+    def require_group(self, name: str | bytes) -> Group: ...
+    def require_dataset(self, name: str | bytes) -> Dataset[Any]: ...
     def create_group(
         self,
-        name: str,
+        name: str | bytes,
         track_order: bool | None = ...,
     ) -> Group: ...
 
@@ -82,7 +82,7 @@ class Group(HLObject, MutableMapping[str, HLObject]):
     @overload
     def create_dataset[T: np.generic](
         self,
-        name: str,
+        name: str | bytes,
         shape: tuple[int, ...] | None,
         dtype: None,
         data: NDArray[T],
@@ -91,7 +91,7 @@ class Group(HLObject, MutableMapping[str, HLObject]):
     @overload
     def create_dataset[T: np.generic](
         self,
-        name: str,
+        name: str | bytes,
         *,
         data: NDArray[T],
         shape: tuple[int, ...] | None = ...,
@@ -101,7 +101,7 @@ class Group(HLObject, MutableMapping[str, HLObject]):
     @overload
     def create_dataset[T: np.generic](
         self,
-        name: str,
+        name: str | bytes,
         shape: tuple[int, ...] | None,
         dtype: _TypedDtypeLike[T],
         data: ArrayLike | None = ...,
@@ -110,7 +110,7 @@ class Group(HLObject, MutableMapping[str, HLObject]):
     @overload
     def create_dataset[T: np.generic](
         self,
-        name: str,
+        name: str | bytes,
         *,
         dtype: _TypedDtypeLike[T],
         shape: tuple[int, ...] | None = ...,
@@ -120,7 +120,7 @@ class Group(HLObject, MutableMapping[str, HLObject]):
     @overload
     def create_dataset(
         self,
-        name: str,
+        name: str | bytes,
         shape: tuple[int, ...] | None = None,
         dtype: DTypeLike | None = None,
         data: ArrayLike | None = None,
@@ -131,7 +131,7 @@ class Group(HLObject, MutableMapping[str, HLObject]):
     @overload
     def create_dataset_like[T: np.generic](
         self,
-        name: str,
+        name: str | bytes,
         other: Dataset[Any],
         *,
         dtype: _TypedDtypeLike[T],
@@ -142,7 +142,7 @@ class Group(HLObject, MutableMapping[str, HLObject]):
     @overload
     def create_dataset_like[T: np.generic](
         self,
-        name: str,
+        name: str | bytes,
         other: Dataset[T],
         *,
         dtype: None = ...,
@@ -153,7 +153,7 @@ class Group(HLObject, MutableMapping[str, HLObject]):
     @overload
     def create_dataset_like(
         self,
-        name: str,
+        name: str | bytes,
         other: Dataset[Any],
         *,
         dtype: DTypeLike | None = ...,
@@ -165,14 +165,14 @@ class Group(HLObject, MutableMapping[str, HLObject]):
     #
     def create_virtual_dataset(
         self,
-        name: str,
+        name: str | bytes,
         layout: VirtualLayout,
         fillvalue: Any = ...,
     ) -> Dataset[Any]: ...
     @contextmanager
     def build_virtual_dataset(
         self,
-        name: str,
+        name: str | bytes,
         shape: tuple[int, ...],
         dtype: DTypeLike,
         maxshape: tuple[int | None, ...] | None = ...,
@@ -185,7 +185,7 @@ class Group(HLObject, MutableMapping[str, HLObject]):
         self,
         source: str | Group | Dataset[Any],
         dest: str | Group,
-        name: str | None = ...,
+        name: str | bytes | None = ...,
         shallow: bool = ...,
         expand_soft: bool = ...,
         expand_external: bool = ...,
@@ -217,7 +217,7 @@ class Group(HLObject, MutableMapping[str, HLObject]):
     @overload  # type: ignore[override]
     def get(  # pyrefly: ignore[bad-override]
         self,
-        name: str,
+        name: str | bytes,
         /,
         *,
         getclass: Literal[True],
@@ -226,7 +226,7 @@ class Group(HLObject, MutableMapping[str, HLObject]):
     @overload
     def get[T](
         self,
-        name: str,
+        name: str | bytes,
         /,
         default: T,
         getclass: Literal[True],
@@ -237,7 +237,7 @@ class Group(HLObject, MutableMapping[str, HLObject]):
     @overload
     def get[T](
         self,
-        name: str,
+        name: str | bytes,
         /,
         default: T,
         getclass: Literal[False],
@@ -246,7 +246,7 @@ class Group(HLObject, MutableMapping[str, HLObject]):
     @overload
     def get(
         self,
-        name: str,
+        name: str | bytes,
         /,
         *,
         getclass: Literal[False],
@@ -255,20 +255,22 @@ class Group(HLObject, MutableMapping[str, HLObject]):
     @overload
     def get[T](
         self,
-        name: str,
+        name: str | bytes,
         /,
         default: T,
         *,
         getlink: Literal[True],
     ) -> _LinkType | T: ...
     @overload
-    def get(self, name: str, /, *, getlink: Literal[True]) -> _LinkType | None: ...
+    def get(
+        self, name: str | bytes, /, *, getlink: Literal[True]
+    ) -> _LinkType | None: ...
 
     # getclass=True, getlink=False or not provided -> type[HLObject] | T
     @overload
     def get[T](
         self,
-        name: str,
+        name: str | bytes,
         /,
         default: T,
         getclass: Literal[True],
@@ -277,7 +279,7 @@ class Group(HLObject, MutableMapping[str, HLObject]):
     @overload
     def get(
         self,
-        name: str,
+        name: str | bytes,
         /,
         *,
         getclass: Literal[True],
@@ -286,7 +288,7 @@ class Group(HLObject, MutableMapping[str, HLObject]):
     @overload
     def get[T](
         self,
-        name: str,
+        name: str | bytes,
         /,
         default: T,
         getclass: Literal[True],
@@ -294,7 +296,7 @@ class Group(HLObject, MutableMapping[str, HLObject]):
     @overload
     def get(
         self,
-        name: str,
+        name: str | bytes,
         /,
         *,
         getclass: Literal[True],
@@ -304,7 +306,7 @@ class Group(HLObject, MutableMapping[str, HLObject]):
     @overload
     def get[T](
         self,
-        name: str,
+        name: str | bytes,
         /,
         default: T,
         getlink: Literal[False],
@@ -312,7 +314,7 @@ class Group(HLObject, MutableMapping[str, HLObject]):
     @overload
     def get(
         self,
-        name: str,
+        name: str | bytes,
         /,
         *,
         getlink: Literal[False],
@@ -320,7 +322,7 @@ class Group(HLObject, MutableMapping[str, HLObject]):
     @overload
     def get[T](
         self,
-        name: str,
+        name: str | bytes,
         /,
         default: T,
         getclass: Literal[False],
@@ -328,7 +330,7 @@ class Group(HLObject, MutableMapping[str, HLObject]):
     @overload
     def get(
         self,
-        name: str,
+        name: str | bytes,
         /,
         *,
         getclass: Literal[False],
@@ -336,7 +338,7 @@ class Group(HLObject, MutableMapping[str, HLObject]):
     @overload
     def get[T](
         self,
-        name: str,
+        name: str | bytes,
         /,
         default: T,
         getclass: Literal[False],
@@ -345,7 +347,7 @@ class Group(HLObject, MutableMapping[str, HLObject]):
     @overload
     def get[T](
         self,
-        name: str,
+        name: str | bytes,
         /,
         *,
         getclass: Literal[False],
@@ -354,15 +356,15 @@ class Group(HLObject, MutableMapping[str, HLObject]):
 
     # No getclass/getlink -> HLObject | T
     @overload
-    def get(self, name: str, /) -> HLObject | None: ...
+    def get(self, name: str | bytes, /) -> HLObject | None: ...
     @overload
-    def get[T](self, name: str, /, default: T) -> HLObject | T: ...
+    def get[T](self, name: str | bytes, /, default: T) -> HLObject | T: ...
 
     # unknown getclass/getlink with explicit default
     @overload
     def get[T](
         self,
-        name: str,
+        name: str | bytes,
         /,
         default: T,
         getclass: bool = ...,
@@ -373,7 +375,7 @@ class Group(HLObject, MutableMapping[str, HLObject]):
     @overload
     def get(
         self,
-        name: str,
+        name: str | bytes,
         /,
         *,
         getclass: bool = ...,
@@ -385,7 +387,7 @@ class Group(HLObject, MutableMapping[str, HLObject]):
     @overload
     def get[T](  # pyright: ignore[reportIncompatibleMethodOverride]
         self,
-        name: str,
+        name: str | bytes,
         /,
         default: T | None = None,
         getclass: bool = False,
