@@ -16,15 +16,17 @@ pip install "git+https://github.com/harrymander/h5py-stubs.git"
 ## Usage
 
 Adds an optional dtype type parameter to `h5py.Dataset`, which will return a
-type-parameterised `numpy.typing.NDArray` when used. E.g.
+type-parameterised `numpy.typing.NDArray` when indexed. E.g.
 
 ```python
+from typing import reveal_type
+
 import h5py
 import numpy as np
 from numpy.typing import NDArray
 
 
-def create_array(f: h5py.File) -> "h5py.Dataset[np.uint16]":
+def create_array(f: h5py.File) -> NDArray[np.uint16]:
     ds = f.create_dataset("test", shape=(10,), dtype=np.uint16)
     reveal_type(ds)  # revealed type is `ds: h5py.Dataset[np.uint16]`
     return ds[:]
