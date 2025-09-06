@@ -78,52 +78,49 @@ class Group(HLObject, MutableMapping[str, HLObject]):
         track_order: bool | None = ...,
     ) -> Group: ...
 
-    #
+    # Create dataset with known type: explicit dtype passed, overrides type of data
     @overload
     def create_dataset[T: np.generic](
         self,
         name: str | bytes,
         shape: tuple[int, ...] | None,
-        dtype: None,
-        data: NDArray[T],
+        dtype: _TypedDtypeLike[T],
+        data: ArrayLike | None = ...,
         **kwargs: Unpack[_CreateDatasetKwargs],
     ) -> Dataset[T]: ...
     @overload
     def create_dataset[T: np.generic](
         self,
         name: str | bytes,
+        shape: tuple[int, ...] | None = ...,
         *,
-        data: NDArray[T],
+        dtype: _TypedDtypeLike[T],
+        data: ArrayLike | None = ...,
+        **kwargs: Unpack[_CreateDatasetKwargs],
+    ) -> Dataset[T]: ...
+
+    # Create datasaet with known type inferred from data
+    @overload
+    def create_dataset[T: np.generic](
+        self,
+        name: str | bytes,
         shape: tuple[int, ...] | None = ...,
         dtype: None = ...,
-        **kwargs: Unpack[_CreateDatasetKwargs],
-    ) -> Dataset[T]: ...
-    @overload
-    def create_dataset[T: np.generic](
-        self,
-        name: str | bytes,
-        shape: tuple[int, ...] | None,
-        dtype: _TypedDtypeLike[T],
-        data: ArrayLike | None = ...,
-        **kwargs: Unpack[_CreateDatasetKwargs],
-    ) -> Dataset[T]: ...
-    @overload
-    def create_dataset[T: np.generic](
-        self,
-        name: str | bytes,
         *,
-        dtype: _TypedDtypeLike[T],
-        shape: tuple[int, ...] | None = ...,
-        data: ArrayLike | None = ...,
+        data: NDArray[T],
         **kwargs: Unpack[_CreateDatasetKwargs],
     ) -> Dataset[T]: ...
+
+    # Create dataset with unknown type (cannot be inferred from either dtype or data).
+    # At least one non-None value for shape, dtype, or data is required, but that is
+    # going to be difficult to express with @overload (perhaps could generate the code).
     @overload
     def create_dataset(
         self,
         name: str | bytes,
-        shape: tuple[int, ...] | None = None,
-        dtype: DTypeLike | None = None,
-        data: ArrayLike | None = None,
+        shape: tuple[int, ...] | None = ...,
+        dtype: DTypeLike | None = ...,
+        data: ArrayLike | None = ...,
         **kwargs: Unpack[_CreateDatasetKwargs],
     ) -> Dataset[Any]: ...
 
