@@ -5,7 +5,7 @@ from typing import Any, Literal, TypedDict, Unpack, overload, override
 
 import numpy as np
 from _typeshed import Incomplete
-from h5py import h5g
+from h5py import h5g, h5r
 from h5py._hl.dataset import Dataset
 from h5py._hl.vds import VirtualLayout
 from numpy.typing import ArrayLike, DTypeLike, NDArray
@@ -45,11 +45,9 @@ class Group(HLObject, MutableMapping[str, HLObject]):
     @override
     def id(self) -> h5g.GroupID: ...
 
-    # MutableMapping iterface
+    # MutableMapping interface
     @override
     def __len__(self) -> int: ...
-    @override
-    def __getitem__(self, key: str) -> HLObject: ...
     @override
     def __delitem__(self, key: str) -> None: ...
     @override
@@ -60,6 +58,13 @@ class Group(HLObject, MutableMapping[str, HLObject]):
     ) -> None: ...
     @override
     def __iter__(self) -> Iterator[str]: ...
+
+    #
+    @override
+    @overload
+    def __getitem__(self, key: str) -> HLObject: ...
+    @overload
+    def __getitem__[T: HLObject](self, key: h5r.Reference[T]) -> T: ...
 
     #
     def require_group(self, name: str) -> Group: ...

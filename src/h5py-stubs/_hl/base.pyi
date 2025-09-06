@@ -1,6 +1,6 @@
 from collections.abc import ItemsView, KeysView, ValuesView
 from os import PathLike
-from typing import Any, override
+from typing import Any, Self, override
 
 import numpy as np
 from h5py._base_id import BaseID
@@ -29,7 +29,7 @@ class HLObject(CommonStateObject):
     @property
     def id(self) -> BaseID: ...
     @property
-    def ref(self) -> Reference: ...
+    def ref(self) -> Reference[Self]: ...
     @property
     def regionref(self) -> _RegionProxy: ...
     @property
